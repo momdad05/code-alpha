@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Logo Redesign Showcase</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    h1 {
+      font-weight: bold;
+    }
+    #output {
+      margin-top: 20px;
+    }
+    img {
+      max-width: 200px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Logo Redesign Showcase</h1>
+  <input type="file" id="logoInput" accept="image/*"><br><br>
+  <textarea id="logicInput" rows="4" cols="50" placeholder="Write the design logic here..."></textarea><br><br>
+  <button onclick="uploadLogo()">Upload Logo Variation</button>
+
+  <div id="output"></div>
+
+  <script>
+    function uploadLogo() {
+      const fileInput = document.getElementById('logoInput');
+      const logicText = document.getElementById('logicInput').value;
+      const outputDiv = document.getElementById('output');
+
+      if (fileInput.files.length === 0) {
+        alert("Please choose a logo image.");
+        return;
+      }
+
+      const file = fileInput.files[0];
+      const reader = new FileReader();
+
+      reader.onload = function(e) {
+        outputDiv.innerHTML = `
+          <h3>Uploaded Logo Preview:</h3>
+          <img src="${e.target.result}" alt="Logo Preview" />
+          <p><strong>Design Logic:</strong> ${logicText}</p>
+        `;
+      };
+
+      reader.readAsDataURL(file);
+    }
+  </script>
+</body>
+</html>
